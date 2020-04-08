@@ -5,56 +5,61 @@
 <div class="row">
     <div class="col-md-12">
         <table class="table table-hover social-accounts"> 
-            <form action="<?php echo e(url('history/filter')); ?>" method="post">
-                <?php echo e(csrf_field()); ?>
-
+            <form action="<?php echo e(url('history/filter')); ?>" method="get">
                 <span class="fa fa-search"></span>
-                <input type="text" name="query" id="myInput" placeholder="Search for Group name.." title="Group name">
-                <input type="date" id="date" name="postDate">
-                <select id="group">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
+                <input type="text" name="query" placeholder="Search for Group name.." title="Group name">
+                <input type="date" name="postDate" data-date-format="YYYY MMMM DD  ">
+                <select name="type" id="group">
+                    <option value="">All group</option>
+                    <option value="upload">Content Upload</option>
+                    <option value="curation">Content curation</option>
+                    <option value="rss-automation">RSS Automation</option>
                   </select>
+                <button>submit</button>
             </form>
             <thead> 
                 <tr><th>Group Name</th> <th>Group type</th> <th>Account Name</th> <th>Post text</th> <th>Time</th> </tr> 
             </thead> 
-            <tbody> 
-                <?php $__currentLoopData = $posts->items(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr>
-                    <td>
-                     <?php echo e($item->name); ?>
+            <tbody>
+                <?php if($posts == ""): ?>
+                    <tr>
+                        <td colspan="5">No Item Found</td>
+                    </tr>
+                <?php else: ?>
+                    <?php $__currentLoopData = $posts->items(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                        <td>
+                        <?php echo e($item->name); ?>
 
-                    </td> 
-                    <td><?php echo e($item->group_type); ?></td> 
-                    <td>
-                        <div class="media">
-                            <div class="media-left">
-                                <a href="">
-                                    <span class="fa fa-<?php echo e($item->type); ?>"></span>
-                                    <img width="50" class="media-object img-circle" src="<?php echo e($item->avatar); ?>" alt="Profile">
-                                </a>
+                        </td> 
+                        <td><?php echo e($item->group_type); ?></td> 
+                        <td>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="">
+                                        <span class="fa fa-<?php echo e($item->type); ?>"></span>
+                                        <img width="50" class="media-object img-circle" src="<?php echo e($item->avatar); ?>" alt="Profile">
+                                    </a>
+                                </div>
+                                <div class="media-body media-middle" style="width: 180px;">
+                                    <h4 class="media-heading"></h4>
+                                </div>
                             </div>
-                            <div class="media-body media-middle" style="width: 180px;">
-                                <h4 class="media-heading"></h4>
-                            </div>
-                        </div>
-                    </td> 
-                    <td>
-                        <?php echo e($item->post_text); ?>
+                        </td> 
+                        <td>
+                            <?php echo e($item->post_text); ?>
 
-                    </td> 
-                    <td>
-                        <?php echo e($item->sent_at); ?>
+                        </td> 
+                        <td>
+                            <?php echo e($item->sent_at); ?>
 
-                    </td> 
-                </tr>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </td> 
+                    </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
             </tbody> 
         </table>
-        <?php echo e($posts->links()); ?>
+        <?php echo e($posts->appends(Request::except('page'))->links()); ?>
 
     </div>
 </div>

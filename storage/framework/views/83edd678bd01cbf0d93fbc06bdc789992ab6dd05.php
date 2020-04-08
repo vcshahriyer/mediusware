@@ -319,7 +319,7 @@ if($user_meta['temp_user'] === true){
                                     class="fa fa-gear"></i> Settings</a></li>
 
                     <li <?php if($route=='history'): ?> class="active" <?php endif; ?>><a href="<?php echo e(url('/history')); ?>"> <i
-                                    class="fa fa-home"></i> History</a></li>
+                                    class="fa fa-stack-exchange"></i>Buffer Post</a></li>
                 <?php endif; ?>
             </ul>
         </div><!-- /.container-fluid -->
