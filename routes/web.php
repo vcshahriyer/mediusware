@@ -74,7 +74,6 @@ Auth::routes();
 Route::post('stripe/webhook', '\Bulkly\Http\Controllers\WebhookController@handleWebhook');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/history', 'BufferPostingController@index')->name('history');
-Route::any('/history/filter', 'BufferPostingController@filter');
 Route::get('/buffer/change/{buffer_id}', 'HomeController@bufferChange')->name('bufferChange');
 Route::resource('subscriptions', 'SubscriptionController');
 Route::get('/settings', 'PagesController@settings')->name('settings');;

@@ -1,11 +1,10 @@
 <?php $__env->startSection('content'); ?>
 <div class="container-fluid app-body">
     <h3>Recent Post Sent to buffer</h3>
-    
 <div class="row">
     <div class="col-md-12">
         <table class="table table-hover social-accounts"> 
-            <form action="<?php echo e(url('history/filter')); ?>" method="get">
+            <form action="<?php echo e(url('history')); ?>" method="get">
                 <span class="fa fa-search"></span>
                 <input type="text" name="query" placeholder="Search for Group name.." title="Group name">
                 <input type="date" name="postDate" data-date-format="YYYY MMMM DD  ">
@@ -59,7 +58,7 @@
                 <?php endif; ?>
             </tbody> 
         </table>
-        <?php echo e($posts->appends(Request::except('page'))->links()); ?>
+        <?php echo e($posts->links()); ?>
 
     </div>
 </div>

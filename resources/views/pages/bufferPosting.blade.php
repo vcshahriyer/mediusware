@@ -1,12 +1,12 @@
+{{-- {{ dd($posts) }} --}}
 @extends('layouts.app')
 @section('content')
 <div class="container-fluid app-body">
     <h3>Recent Post Sent to buffer</h3>
-    {{-- {{ dd($posts) }} --}}
 <div class="row">
     <div class="col-md-12">
         <table class="table table-hover social-accounts"> 
-            <form action="{{url('history/filter')}}" method="get">
+            <form action="{{url('history')}}" method="get">
                 <span class="fa fa-search"></span>
                 <input type="text" name="query" placeholder="Search for Group name.." title="Group name">
                 <input type="date" name="postDate" data-date-format="YYYY MMMM DD  ">
@@ -57,7 +57,7 @@
                 @endif
             </tbody> 
         </table>
-        {{ $posts->appends(Request::except('page'))->links() }}
+        {{ $posts->links() }}
     </div>
 </div>
 
